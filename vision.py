@@ -9,7 +9,7 @@ BAUD_RATE = 460800
 
 try:
     ser = serial.Serial(COM_PORT, BAUD_RATE, timeout=2)
-    print(f"已成功連接至 {COM_PORT}，等待 AI 影像串流中...")
+    print(f"已成功連接至 {COM_PORT}，等待 AI 影像串流中")
 except Exception as e:
     print(f"無法開啟 {COM_PORT}。請確認已關閉 Serial Monitor。")
     exit()
@@ -22,7 +22,7 @@ while True:
         
         if line == "[[FRAME_START]]":
             prob_line = ser.readline().decode('utf-8').strip()
-            # 接住 ESP32 傳過來的硬體 FPS
+            # ESP32 傳過來的硬體 FPS
             esp32_fps_line = ser.readline().decode('utf-8').strip() 
             b64_line = ser.readline().decode('utf-8').strip()
             end_line = ser.readline().decode('utf-8').strip()
@@ -59,7 +59,6 @@ while True:
                     sys_fps = 0.0
                 prev_time = current_time
                 
-                # --- 將兩種 FPS 顯示在畫面上進行對比 ---
                 
                 # 1. 顯示 ESP32 端的純運算 FPS (橘色)
                 #cv2.putText(img_color, f"ESP32 FPS: {esp32_fps:.1f}", (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
